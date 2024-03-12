@@ -1,17 +1,11 @@
-from rest_framework.viewsets import ModelViewSet
+from rest_framework.generics import CreateAPIView
 from rest_framework_simplejwt.views import (TokenObtainPairView,
                                             TokenRefreshView)
 
 from .models import CustomUser
-from .serializers import ReadSerializer, SignupSerializer
+from .serializers import SignupSerializer
 
 
-class UserViewSet(ModelViewSet):
+class UserCreateView(CreateAPIView):
     queryset = CustomUser.objects.all()
-    serializer_class = ReadSerializer
-
-    def get_serializer_class(self):
-        if self.action == "create":
-            return SignupSerializer
-
-        return super().get_serializer_class()
+    serializer_class = SignupSerializer

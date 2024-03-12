@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.core.files import File
 from django.core.files.storage import FileSystemStorage
 from rest_framework import serializers
@@ -5,9 +6,9 @@ from rest_framework.serializers import (ModelSerializer,
                                         PrimaryKeyRelatedField,
                                         SerializerMethodField)
 
-from users.models import CustomUser
-
 from .models import Event, Organization
+
+UserModel = get_user_model()
 
 
 class OrganizationCreateSerializer(ModelSerializer):
@@ -29,14 +30,14 @@ class OrganizationReadSerializer(ModelSerializer):
         fields = ("id", "title", "combined_address_postcode")
 
     def get_combined_address_postcode(self, obj):
-        return obj.address + ", " + str(obj.postcode)
+        return "{}, {}".format(obj.address, str(obj.postcode))
 
 
 class UserFromOrganizationSerializer(ModelSerializer):
     organization = OrganizationReadSerializer()
 
     class Meta:
-        model = CustomUser
+        model = UserModel
         fields = ("email", "organization")
 
 

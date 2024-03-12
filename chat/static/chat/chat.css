@@ -1,0 +1,7 @@
+textarea { 
+  vertical-align: bottom;  
+  margin: -10;         
+  padding: -10;       
+  display: block;  
+  resize: none;
+}

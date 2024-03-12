@@ -1,6 +1,7 @@
-from django.apps import apps
 from django.contrib.auth import get_user_model
 from django.db import models
+
+UserModel = get_user_model()
 
 
 class Organization(models.Model):
@@ -21,8 +22,7 @@ class Event(models.Model):
     date = models.DateField(verbose_name="Дата")
 
     def get_participants(self):
-        user_model = get_user_model()
-        participants = user_model.objects.none()
+        participants = UserModel.objects.none()
 
         for org in self.organizations.all():
             participants = participants.union(org.users.all())

@@ -1,8 +1,10 @@
-from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
-                                        PermissionsMixin)
+from django.contrib.auth.models import (AbstractBaseUser, AbstractUser,
+                                        BaseUserManager, PermissionsMixin)
 from django.db import models
-from main.models import Organization
 from phonenumber_field.modelfields import PhoneNumberField
+
+# from chat.models import Chat
+# from main.models import Organization
 
 
 class CustomUserManager(BaseUserManager):
@@ -44,7 +46,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     phone_number = PhoneNumberField(verbose_name="Номер телефона")
     email = models.EmailField(verbose_name="Email", unique=True)
     organization = models.ForeignKey(
-        to=Organization,
+        to="main.Organization",
         on_delete=models.SET_NULL,
         related_name="users",
         null=True,
@@ -56,6 +58,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     )
 
     objects = CustomUserManager()
+    chats = models.ManyToManyField(to="chat.Chat", related_name="users")
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
+
+    class Meta:
+        abstract = False

@@ -9,6 +9,7 @@ celery==5.3.6
 certifi==2024.2.2
 cffi==1.16.0
 channels==4.0.0
+channels-redis==4.2.0
 charset-normalizer==3.3.2
 click==8.1.7
 click-didyoumean==0.3.0
@@ -30,6 +31,7 @@ idna==3.6
 incremental==22.10.0
 inflection==0.5.1
 kombu==5.3.5
+msgpack==1.0.8
 oauthlib==3.2.2
 packaging==24.0
 phonenumbers==8.13.31

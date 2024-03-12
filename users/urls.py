@@ -1,10 +1,9 @@
 from django.urls import path
 
-from .views import TokenObtainPairView, TokenRefreshView, UserViewSet
+from .views import TokenObtainPairView, TokenRefreshView, UserCreateView
 
 urlpatterns = [
-    path("", UserViewSet.as_view({"post": "create"})),
-
+    path("", UserCreateView.as_view()),
     path("jwt/obtain", TokenObtainPairView.as_view()),
     path("jwt/refresh", TokenRefreshView.as_view())
 ]

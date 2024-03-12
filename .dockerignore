@@ -1,4 +1,4 @@
 .venv
-db
-static
-media
+/db
+/static
+/media

@@ -54,8 +54,8 @@ INSTALLED_APPS = [
     "django_filters",
 
     "main",
-    "users",
     "chat",
+    "users",
 
 ]
 
@@ -149,6 +149,12 @@ REST_FRAMEWORK = {
     ),
 }
 
+# AUTHENTICATIONS_BACKENDS = [
+#     # "django.contrib.auth.backends.ModelBackend",
+#     # "users.backends.JWTBackend"
+#     "rest_framework_simplejwt.authentication.JWTAuthentication",
+# ]
+
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
 
@@ -176,6 +182,15 @@ SWAGGER_SETTINGS = {
             "type": "apiKey",
             "name": "Authorization",
             "in": "header"
+        }
+    }
+}
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("redis", 6379)]
         }
     }
 }

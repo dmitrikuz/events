@@ -49,8 +49,10 @@ class EventsCreateView(GenericAPIView):
 
         response_data = {
             "success": True,
-            "message": "Creation of event {} is scheduled in {} seconds".format(
-                serializer.data["title"], self.delay
+            "message": "Creation of event {}, {} is scheduled in {} seconds".format(
+                serializer.data["title"],
+                serializer.data["date"],
+                self.delay
             )
         }
         return Response(
