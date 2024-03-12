@@ -1,6 +1,7 @@
 from django.conf import settings
 from rest_framework import pagination, status
-from rest_framework.generics import GenericAPIView, ListAPIView
+from rest_framework.generics import (CreateAPIView, GenericAPIView,
+                                     ListAPIView, RetrieveAPIView)
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
@@ -24,7 +25,7 @@ class FilteredEventsListView(ListAPIView):
     pagination_class = EventsPagination
 
 
-class EventsByParticipantsListView(ListAPIView):
+class EventParticipantsDetailView(RetrieveAPIView):
     queryset = Event.objects.all()
     serializer_class = EventWithParticipantsReadSerializer
     permission_classes = [IsAuthenticated]
@@ -49,7 +50,7 @@ class EventsCreateView(GenericAPIView):
 
         response_data = {
             "success": True,
-            "message": "Creation of event {}, {} is scheduled in {} seconds".format(
+            "message": "Создание мероприятия {}, {} запланировано через {} секунд".format(
                 serializer.data["title"],
                 serializer.data["date"],
                 self.delay
@@ -61,6 +62,6 @@ class EventsCreateView(GenericAPIView):
         )
 
 
-class OrganizationListView(ListAPIView):
+class OrganizationCreateView(CreateAPIView):
     queryset = Organization.objects.all()
     serializer_class = OrganizationCreateSerializer

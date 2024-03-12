@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from .models import CustomUser
+from users.models import CustomUser
 
 
 class SignupSerializer(ModelSerializer):

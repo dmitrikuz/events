@@ -14,7 +14,7 @@ class Chat(models.Model):
     def last_message(self):
         if (msg := self.messages.last()) is not None:
             return str(msg)
-        return "..."
+        return ""
 
 
 class Message(models.Model):

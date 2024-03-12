@@ -1,19 +1,28 @@
+{% if request.user.is_authenticated %}
 <h2>{{request.user.email}}</h2>
- <h2>Мои чаты</h2>
-    <ul>
-        {% for chat in chats %}
-     <li>
+<h2><form method="post" action="{% url 'logout' %}">
+  {% csrf_token %}
+  <input type="submit" value="Выйти">
+</form></h2>
+{% else %}
+<h2><a href="{% url 'login' %}"> Войти </a></h2>
+<h2><a href="{% url 'signup' %}"> Зарегистрироваться </a></h2>
+{% endif %}
+<h2>Мои чаты</h2>
+  <ul>
+      {% for chat in chats %}
+   <li>
 
-    <a href= "{% url 'chat' chat.id %}">
-            {% for user in chat.participants %}
-                {% if user != request.user %}
-                    {{ user }}
-                {% endif %}
-            {% endfor %}
-    </a>
-      </li>
-        {% endfor %}
-    </ul>
+  <a href= "{% url 'chat' chat.id %}">
+          {% for user in chat.participants %}
+              {% if user != request.user %}
+                  {{ user }}
+              {% endif %}
+          {% endfor %}
+  </a>
+    </li>
+      {% endfor %}
+  </ul>
 
 <h2>Новый чат</h2>
 <form method="post">{% csrf_token %}

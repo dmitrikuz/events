@@ -1,12 +1,12 @@
 from django.urls import path
 
-from .views import (EventsByParticipantsListView, EventsCreateView,
-                    FilteredEventsListView, OrganizationListView)
+from . import views
 
 urlpatterns = [
 
-    path("organizations", OrganizationListView.as_view()),
-    path("events", EventsCreateView.as_view()),
-    path("events/participants", EventsByParticipantsListView.as_view()),
-    path("events/filtered", FilteredEventsListView.as_view()),
+    path("organizations", views.OrganizationCreateView.as_view()),
+    path("events", views.EventsCreateView.as_view()),
+    path("events/<int:pk>/participants",
+         views.EventParticipantsDetailView.as_view()),
+    path("events/filtered", views.FilteredEventsListView.as_view()),
 ]
