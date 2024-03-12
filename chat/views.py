@@ -26,6 +26,9 @@ class CreateChatForm(forms.ModelForm):
         if queryset.exists():
             raise ValidationError("Такой чат уже существует")
 
+        if value == self.request.user.pk:
+            raise ValidationError("Такой чат создать нельзя")
+
         return value
 
     class Meta:

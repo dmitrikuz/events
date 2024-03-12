@@ -3,10 +3,9 @@ services:
     build: .
     env_file: .env
     volumes:
-      # - "./static:/app/static/"
-      # - "./media:/app/media"
-      # - "./db:/app/db"
-      - "./:/app"
+      - "./static:/app/static/"
+      - "./media:/app/media"
+      - "./db:/app/db"
     command: "sh /app/entrypoint.sh"
     ports:
       - 5555:8000
@@ -15,10 +14,9 @@ services:
     build: .
     env_file: .env
     volumes:
-      # - "./static:/app/static/"
-      # - "./media:/app/media"
-      # - "./db:/app/db"
-      - "./:/app"
+      - "./static:/app/static/"
+      - "./media:/app/media"
+      - "./db:/app/db"
     command: "sh celery/worker/entrypoint.sh"
 
   redis:
