@@ -10,6 +10,9 @@ class Organization(models.Model):
     address = models.CharField(max_length=50, verbose_name="Адресc")
     postcode = models.PositiveIntegerField(verbose_name="Почтовый индекс")
 
+    def __str__(self):
+        return self.title
+
 
 class Event(models.Model):
     title = models.CharField(max_length=30, verbose_name="Название")
@@ -27,3 +30,6 @@ class Event(models.Model):
         for org in self.organizations.all():
             participants = participants.union(org.users.all())
         return participants
+
+    def __str__(self):
+        return self.title
