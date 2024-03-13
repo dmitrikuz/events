@@ -14,3 +14,9 @@ localhost:5555/docs
 ```
 localhost:5555/users/signup
 ```
+
+## Чат
+```
+localhost:5555/chat
+```
+
