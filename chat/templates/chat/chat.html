@@ -8,8 +8,9 @@
 <body>
     <textarea id="chat-log" cols="120" rows="60">
     {% for message in messages %}
-        {{ message }}
-    {% endfor %}
+
+{{ message }}{% endfor %}
+
     </textarea>
         <br>
     <input id="chat-message-input" type="text" size="100"><br>
@@ -17,6 +18,8 @@
     {{chat_id | json_script:"chat-id" }}
     <script>
         const roomName = JSON.parse(document.getElementById('chat-id').textContent);
+        var chat = document.querySelector('#chat-log');
+        chat.scrollTop = chat.scrollHeight;
 
         const chatSocket = new WebSocket(
             'ws://'
@@ -28,7 +31,8 @@
 
         chatSocket.onmessage = function(e) {
             const data = JSON.parse(e.data);
-            document.querySelector('#chat-log').value += (data.message + "\n");
+            chat.value += "\n" + data.message + "\n"
+            chat.scrollTop = chat.scrollHeight;
         };
 
         chatSocket.onclose = function(e) {
